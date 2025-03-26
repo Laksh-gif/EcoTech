@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Disaster Relief Coordination</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Animated Gradient Background -->
+    <div class="gradient-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">AI<span>Relief</span></div>
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="#map-section">Live Map</a></li>
+            <li><a href="#report">Report</a></li>
+            <li><a href="#disasters">Disasters</a></li>
+            <li><a href="#resources">Resources</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="hero">
+            <h1 class="animate__animated animate__fadeInDown">AI Disaster Relief Coordination</h1>
+            <p class="animate__animated animate__fadeIn">Real-time disaster monitoring and response system powered by
+                artificial intelligence</p>
+        </div>
+
+        <!-- Map Section -->
+        <section id="map-section" class="map-section">
+            <div class="map-controls">
+                <h3><i class="fas fa-map-marked-alt"></i> Live Disaster Map</h3>
+                <div class="map-buttons">
+                    <button class="btn btn-secondary" onclick="clearSelection()">
+                        <i class="fas fa-times"></i> Clear Selection
+                    </button>
+                    <button class="btn btn-secondary" onclick="zoomToAllDisasters()">
+                        <i class="fas fa-search-location"></i> View All
+                    </button>
+                </div>
+            </div>
+            <p>Click on the map to mark a disaster location</p>
+            <div id="map"></div>
+        </section>
+
+        <!-- Report Form -->
+        <section id="report" class="report-form">
+            <h3><i class="fas fa-exclamation-triangle"></i> Report a Disaster</h3>
+            <div class="form-group">
+                <label>Disaster Type</label>
+                <select id="disaster-type">
+                    <option value="Earthquake">🌍 Earthquake</option>
+                    <option value="Flood">🌊 Flood</option>
+                    <option value="Fire">🔥 Fire</option>
+                    <option value="Storm">🌪️ Storm</option>
+                    <option value="Other">⚠️ Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Location Name</label>
+                <input type="text" id="location-name" placeholder="Enter location name">
+            </div>
+            <div class="form-group">
+                <label>Severity Level</label>
+                <select id="severity-level">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                </select>
+            </div>
+            <button class="btn" onclick="submitDisaster()">
+                <i class="fas fa-paper-plane"></i> Report Disaster
+            </button>
+        </section>
+
+        <!-- Disaster List -->
+        <section id="disasters" class="disaster-list">
+            <h3><i class="fas fa-list"></i> Reported Disasters</h3>
+            <div id="disasters-container"></div>
+        </section>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-item">
+            <i class="fas fa-globe"></i>
+            <span>Global Coverage</span>
+        </div>
+        <div class="status-item">
+            <i class="fas fa-clock"></i>
+            <span>Real-time Updates</span>
+        </div>
+        <div class="status-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure System</span>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
