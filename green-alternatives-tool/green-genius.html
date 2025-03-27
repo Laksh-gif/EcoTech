@@ -4,124 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenGenius | EcoShop AI Recommender</title>
+    <title>GreenGenius | Eco-Friendly Recommender</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollTrigger/1.0.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Animated Gradient Background -->
-    <div class="gradient-bg"></div>
-
-    <!-- Floating Eco Elements -->
-    <div class="eco-elements">
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="circuit"></div>
-        <div class="circuit"></div>
-    </div>
-
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">Green<span>Genius</span></div>
         <ul class="nav-links">
             <li><a href="/index.html">Home</a></li>
+            <li><a href="#calculator">Impact Calculator</a></li>
         </ul>
-
         <div class="hamburger">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="fade-in">Green<span class="highlight">Genius</span></h1>
-            <p class="fade-in delay">GreenGenius leverages artificial intelligence to analyze products and suggest
-                greener alternatives with high accuracy. By combining sustainability metrics with user preferences, we
-                bridge the gap between conscious consumption and convenience. Join us in building a smarter, cleaner
-                future—one purchase at a time.</p>
+            <h1 class="fade-in">Discover Sustainable Living with <span class="highlight">GreenGenius</span></h1>
+            <p class="fade-in delay">Find eco-friendly alternatives to everyday products using our advanced AI
+                recommender system.</p>
             <div class="search-container fade-in delay-2">
-                <input type="text" id="search-input" placeholder="What product do you want to replace?">
+                <input type="text" id="search-input" placeholder="Search for a product to replace (e.g., toothbrush)">
                 <button class="search-btn">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search"></i> Search
                 </button>
                 <div id="ai-loading">
-                    <div class="loading-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <span>Analyzing eco-options...</span>
+                    <div class="loading-spinner"></div>
+                    <span>Analyzing sustainable options...</span>
                 </div>
             </div>
 
-            <!-- Results Section moved here -->
             <div class="results-container">
                 <div class="section-header">
-                    <h2 class="slide-up">Eco-Friendly <span>Alternatives</span></h2>
+                    <h2 class="slide-up">Sustainable <span>Alternatives</span></h2>
                     <div class="divider"></div>
                 </div>
-                <div class="results" id="results">
-                    <!-- Example Product Cards -->
-                    <div class="product-card">
-                        <div class="product-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <span>Bamboo Toothbrush</span>
-                                <span class="similarity">92% Match</span>
-                            </div>
-                            <div class="product-desc">
-                                Biodegradable bamboo handle with charcoal-infused bristles. Plastic-free packaging.
-                            </div>
-                            <div class="confidence-bar">
-                                <div class="confidence-level" style="width: 92%"></div>
-                            </div>
-                            <div class="product-meta">
-                                <div class="meta-item">
-                                    <i class="fas fa-leaf"></i> 100% Biodegradable
-                                </div>
-                                <div class="meta-item">
-                                    <i class="fas fa-recycle"></i> Recyclable
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <div class="product-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name">
-                                <span>Stainless Steel Bottle</span>
-                                <span class="similarity">88% Match</span>
-                            </div>
-                            <div class="product-desc">
-                                Durable, insulated stainless steel water bottle that keeps drinks hot or cold for hours.
-                            </div>
-                            <div class="confidence-bar">
-                                <div class="confidence-level" style="width: 88%"></div>
-                            </div>
-                            <div class="product-meta">
-                                <div class="meta-item">
-                                    <i class="fas fa-battery-full"></i> Lifetime Warranty
-                                </div>
-                                <div class="meta-item">
-                                    <i class="fas fa-recycle"></i> 100% Recyclable
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="filters">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="relevance">Relevance</option>
+                        <option value="sustainability">Sustainability Score</option>
+                        <option value="price">Price (Low to High)</option>
+                    </select>
                 </div>
+                <div class="results" id="results"></div>
             </div>
         </div>
+    </section>
+
+    <section class="calculator" id="calculator">
+        <div class="section-header">
+            <h2>Calculate Your Environmental Impact</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="calc-inputs">
+            <input type="number" id="plastic-use" placeholder="Weekly plastic item usage">
+            <button id="calc-btn">Calculate Impact</button>
+        </div>
+        <div id="calc-result"></div>
     </section>
 
     <script src="script.js"></script>
